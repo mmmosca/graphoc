@@ -1,4 +1,4 @@
-#[[
+/*
 This program is free software: you can redistribute it and/or 
 modify it under the terms of the GNU General Public License
 as published by the Free Software Foundation, either version 3
@@ -13,14 +13,31 @@ You should have received a copy of the GNU General Public License
 along with this program. If not, see https://www.gnu.org/licenses/.
  
 Author Marco M. Mosca, email: marcomichele.mosca@gmail.com
-]]
+*/
+#include "graph.h"
+#include "string.h"
+#include "assert.h"
+#include "tests.h"
 
-cmake_minimum_required(VERSION 3.5.0)
-project(graphoc VERSION 0.1.0 LANGUAGES C)
+void test_get_edge_count()
+{
+    graph_t* graph;
+    if ( ( graph = create_graph(5, labels) ) == NULL )  {
+		exit(EXIT_FAILURE);
+    }
+    for(char** e=edges; *e!=NULL; e++){
+		if (  add_edge(graph,*e) == -1 ) {
+			fprintf(stderr, "Adding edge failed: %s", *e);
+			perror("");
+			exit(EXIT_FAILURE);
+		}
+    }
+	assert(get_edge_count(graph) == 6);
+    free_graph(&graph);
+}
 
-include(CTest)
-
-add_subdirectory (graphoc)
-add_subdirectory (tests)
-
-enable_testing()
+int main()
+{
+  test_get_edge_count();
+  return 0;
+}
