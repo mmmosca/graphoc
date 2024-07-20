@@ -1,5 +1,5 @@
 # graphoc
-C API for Unix to create `undirected graphs` and compute the shortest paths with `Dijkstra` 
+C API for Unix to create `graphs` and compute the shortest paths with `Dijkstra` 
 
 ## Installation (Unix)
 1. Download the repository

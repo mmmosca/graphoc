@@ -1,4 +1,4 @@
-#[[
+/*
 This program is free software: you can redistribute it and/or 
 modify it under the terms of the GNU General Public License
 as published by the Free Software Foundation, either version 3
@@ -13,14 +13,40 @@ You should have received a copy of the GNU General Public License
 along with this program. If not, see https://www.gnu.org/licenses/.
  
 Author Marco M. Mosca, email: marcomichele.mosca@gmail.com
-]]
+*/
+#include "graph.h"
+#include "spaths.h"
+#include "string.h"
+#include "assert.h"
+#include "tests.h"
 
-cmake_minimum_required(VERSION 3.5.0)
-project(graphoc VERSION 0.1.0 LANGUAGES C)
+void test_dijkstra()
+{
+    graph_t* graph;
+	double *dist = NULL;
+	unsigned int * predecessors=NULL;
 
-include(CTest)
+    if ( ( graph = create_graph(5, labels) ) == NULL )  {
+      exit(EXIT_FAILURE);
+    }
+    for(char** e=edges; *e!=NULL; e++){
+		if (  add_edge(graph,*e) == -1 ) {
+			exit(EXIT_FAILURE);
+		}
+    }
+	if ( ( dist = dijkstra(graph, 0, &predecessors) ) == NULL ) {
+		perror("Dijkstra on Cambridge error");
+		exit(EXIT_FAILURE);
+    }
+	for(int i=0;i<5;++i) {
+		assert(dist[i] == camb_distances[i]);
+	}
 
-add_subdirectory (graphoc)
-add_subdirectory (tests)
+    free_graph(&graph);
+}
 
-enable_testing()
+int main()
+{
+  test_dijkstra();
+  return 0;
+}
