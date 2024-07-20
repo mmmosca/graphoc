@@ -25,7 +25,7 @@
 #define INFINITY (-1.0)
 #define UNDEF ((unsigned int) -1)
 
-/** Find the shortest paths in a graph with Dijkstra
+/** Find the shortest paths in a graph with Dijkstra starting from source
     \param g Weighted graph
     \param source Starting node
     \param predecessors Pointer to the predecessor array. It is updated 

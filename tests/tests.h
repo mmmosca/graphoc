@@ -34,7 +34,7 @@ static char* edges[] = {
     "MANCHESTER:LIVERPOOL:20.0",
     "CAMBRIDGE:LIVERPOOL:60.0",
     "CAMBRIDGE:OXFORD:10.0",
-    "OXFORD:LIVERPOOL:20.0",
+    "OXFORD:LIVERPOOL:40.0",
     NULL,
 };
 
@@ -51,4 +51,12 @@ static int degrees[]= {
     1,
     0,
     1,
+};
+
+static unsigned int camb_distances[] = {
+	0.0,
+	20.0,
+	40.0,
+	50.0,
+	10.0,
 };
