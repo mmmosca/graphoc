@@ -68,7 +68,7 @@ int main(int argc, char* argv[]) {
 	if ( ( dist = dijkstra(graph, 0, &predecessors) ) == NULL ) {
 		perror("Dijkstra error");
 		exit(EXIT_FAILURE);
-    }
+	}
 	/* Use vector of distances 'dist' and 'predecessors' from 'node1' */
 	free_graph(&graph);
 	...
