@@ -39,7 +39,7 @@ install(TARGETS ${PROJECT_NAME} LIBRARY DESTINATION lib)
 #include "spaths.h"
 ...
 int main(int argc, char* argv[]) {
-    graph_t* graph;
+	graph_t* graph;
 	double *dist = NULL;
 	unsigned int * predecessors=NULL;
 	char * labels[] = {
@@ -56,24 +56,22 @@ int main(int argc, char* argv[]) {
 		NULL,
 	};
 
-    if ( ( graph = create_graph(<number_of_nodes>, labels) ) == NULL )  {
-      exit(EXIT_FAILURE);
-    }
-    for(char** e=edges; *e!=NULL; e++){
+	if ( ( graph = create_graph(<number_of_nodes>, labels) ) == NULL )  {
+		exit(EXIT_FAILURE);
+	}
+	for(char** e=edges; *e!=NULL; e++){
 		if (  add_edge(graph,*e) == -1 ) {
 			perror("Adding edge error");
 			exit(EXIT_FAILURE);
 		}
-    }
+	}
 	if ( ( dist = dijkstra(graph, 0, &predecessors) ) == NULL ) {
 		perror("Dijkstra error");
 		exit(EXIT_FAILURE);
-    }
-	
+	}
 	/* Use vector of distances 'dist' and 'predecessors' from 'node1' */
-
-    free_graph(&graph);
-    ...
+	free_graph(&graph);
+	...
 }
 ```
 

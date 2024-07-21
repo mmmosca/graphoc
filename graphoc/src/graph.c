@@ -20,7 +20,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <errno.h>
-#include <mcheck.h>
 #include <string.h>
 #include <ctype.h>
 #include "graph.h"
@@ -281,7 +280,7 @@ int add_edge (graph_t * g, char* e)
 	return -1;
 }
 
-int is_node(graph_t* g, char* ss)
+int is_node(graph_t* g, char* label)
 {
 	int i;
 	node_t* nodo;
@@ -292,7 +291,7 @@ int is_node(graph_t* g, char* ss)
 	i=0;
 	while ((nodo+i)->label != NULL)
 	{
-		if (strcmp((nodo+i)->label, ss)==0) return i;
+		if (strcmp((nodo+i)->label, label)==0) return i;
 		i++;
 	}
 	return -1;
@@ -402,14 +401,14 @@ int check_weight(char* s)
 	return estratto;
 }
 
-char* get_input_f(FILE* fd_n)
+char* get_input_f(FILE* filedescr)
 {
 	char* input;
 	int i=0;
 	
 	input=malloc(MAXLABEL * sizeof(char));
-	fgets( input, MAXLABEL, fd_n );
-	if (feof(fd_n)) {free(input);return NULL;}
+	fgets( input, MAXLABEL, filedescr );
+	if (feof(filedescr)) {free(input);return NULL;}
 	while(input[i] != '\n') i++;
 	input[i]='\0';
 	return input;
