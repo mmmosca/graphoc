@@ -1,5 +1,9 @@
 All changes to the repository will be reported here
 
+## [0.2.1]
+### Updated
+- cmake exports
+
 ## [0.2.0]
 ### Added
 - CI on Windows
