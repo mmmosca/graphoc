@@ -53,7 +53,7 @@ static int degrees[]= {
     1,
 };
 
-static unsigned int camb_distances[] = {
+static double camb_distances[] = {
 	0.0,
 	20.0,
 	40.0,
