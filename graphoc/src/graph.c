@@ -98,23 +98,21 @@ graph_t * create_graph (unsigned int n, char **labels)
 	errno = EINVAL;
 	if ((labels == NULL) || (n==0)) {return NULL;};
 	errno = ENOMEM;
-	if ((k=malloc(sizeof(graph_t))) == NULL) {return NULL;};
-	nodo=malloc(n * sizeof(node_t));
-	if (nodo == NULL) {free(k);return NULL;};
+	if ((k=(graph_t*)malloc(sizeof(graph_t))) == NULL) {return NULL;};
+	if ((nodo=(node_t*)malloc((n+1) * sizeof(node_t))) == NULL) {free(k);return NULL;};
 	k->size = n;
 	
 	while (i<n && labels[i] != NULL)
 	{
 		len = strlen((const char*) labels[i]); 
-		s=malloc((len) * sizeof(char)+1);
-		if (s== NULL) {return NULL;};
+		if((s=(char*)malloc(len * sizeof(char) + 1)) == NULL) {return NULL;};
 		strcpy(s,(const char*) labels[i]);
-		(nodo+i)->label = s; 
-
+		(nodo+i)->label = s;
 		(nodo+i)->adj = NULL;
 		i++; 
 	}
 	(nodo+i)->label=NULL;
+	(nodo+i)->adj = NULL;
 	k->node = nodo;
 	return k;
 }
@@ -462,16 +460,13 @@ graph_t* load_graph (FILE * nodefile, FILE * edgefile)
 
 int save_graph (FILE * nodefile, FILE * edgefile, graph_t* g)
 {
-	int i=0, len;
+	int i=0;
 	node_t* node;
 	edge_t* ag;
 	double d;
 	unsigned int j;
-	char* s;
 	
 	if((nodefile==NULL) || (edgefile==NULL) || g==NULL) {errno=EINTR;return -1;};
-	
-	s=malloc(3 * sizeof(char));
 	errno=EIO;
 	node = g->node;
 	while((node+i)->label != NULL)
@@ -481,14 +476,11 @@ int save_graph (FILE * nodefile, FILE * edgefile, graph_t* g)
 		while(ag != NULL)
 		{
 			d=ag->weight;
-			sprintf(s,"%f",d);
 			j=ag->label;
-			len = strlen((node+i)->label)+strlen((node+j)->label)+strlen(s);
 			if((fprintf(edgefile, "%s:%s:%.1f\n", (node+i)->label,(node+j)->label,d))<0) {return -1;};
 			ag=ag->next;
 		}
 		i++;
 	} 
-	free(s);
 	return 0;
 }
