@@ -23,7 +23,7 @@ void test_get_degree()
 {
     graph_t* graph;
     if ( ( graph = create_graph(5, labels) ) == NULL )  {
-      exit(EXIT_FAILURE);
+    	exit(EXIT_FAILURE);
     }
 	for(char** p=edges; *p!=NULL; p++){
 		if (  add_edge(graph,*p) == -1 ) {
@@ -40,6 +40,6 @@ void test_get_degree()
 
 int main()
 {
-  test_get_degree();
-  return 0;
+	test_get_degree();
+	return 0;
 }

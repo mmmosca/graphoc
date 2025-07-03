@@ -167,11 +167,11 @@ int save_graph (FILE * nodefile, FILE * edgefile, graph_t* g);
 
 /** Create a graph 
     \param n Number of Nodes
-    \param labels Pointer to array of labels:
+    \param labels Pointer to array of labels with NULL terminator:
     static const char* labels[] = {
         "CAMBRIDGE",
         "LONDON",
-        "MACHESTER",
+        "MANCHESTER",
         "LIVERPOOL",
         NULL,
        };
