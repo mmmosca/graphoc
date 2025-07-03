@@ -21,23 +21,23 @@ Author Marco M. Mosca, email: marcomichele.mosca@gmail.com
 
 void test_get_edge_count()
 {
-    graph_t* graph;
-    if ( ( graph = create_graph(5, labels) ) == NULL )  {
+	graph_t* graph;
+	if ( ( graph = create_graph(5, labels) ) == NULL )  {
 		exit(EXIT_FAILURE);
-    }
-    for(char** e=edges; *e!=NULL; e++){
+	}
+	for(char** e=edges; *e!=NULL; e++){
 		if (  add_edge(graph,*e) == -1 ) {
 			fprintf(stderr, "Adding edge failed: %s", *e);
 			perror("");
 			exit(EXIT_FAILURE);
 		}
-    }
+	}
 	assert(get_edge_count(graph) == 6);
-    free_graph(&graph);
+	free_graph(&graph);
 }
 
 int main()
 {
-  test_get_edge_count();
-  return 0;
+	test_get_edge_count();
+	return 0;
 }
