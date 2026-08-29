@@ -159,7 +159,7 @@ graph_t* copy_graph (graph_t* g)
 	graph_t* p;
 	node_t* nodeg, *nodep;
 	char* s;
-	edge_t* ag, *tail;
+	edge_t* ag, *tail, *prev;
 		
 	errno=EINVAL;
 	if (g == NULL) {return NULL;};
@@ -176,7 +176,6 @@ graph_t* copy_graph (graph_t* g)
 	{
 		len = strlen((const char*) ((nodeg+i)->label));
 		s = malloc((len) * sizeof(char)+1);
-	/**     labels[i]=malloc((len+1) * sizeof(char));*/
 		if (s == NULL) {return NULL;};
 		strcpy(s,(const char*) ((nodeg+i)->label));
 		strcpy(labels[i],s);
@@ -193,14 +192,23 @@ graph_t* copy_graph (graph_t* g)
 	while((nodeg+i)->label != NULL)
 	{
 		ag = (nodeg+i)->adj;
+		prev = (nodep+i)->adj;
 		while(ag != NULL)
 		{
-		tail=malloc(sizeof(edge_t));
-		tail->label = ag ->label;
-		tail->weight = ag ->weight;
-		tail->next = (nodep+i)->adj;
-		(nodep+i)->adj = tail;
-		ag = ag->next;
+			if ( (tail=malloc(sizeof(edge_t))) == NULL ) {
+				errno=ENOMEM;
+				return NULL;
+			}
+			tail->label = ag->label;
+			tail->weight = ag->weight;
+			tail->next = NULL;
+			if ( prev == NULL ) {
+				(nodep+i)->adj = tail;
+			} else {
+				prev->next = tail;
+			}
+			prev = tail;
+			ag = ag->next;
 		}
 		i++;
 	}
