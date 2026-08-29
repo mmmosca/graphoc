@@ -16,7 +16,7 @@ Author Marco M. Mosca, email: marcomichele.mosca@gmail.com
 ]]
 
 cmake_minimum_required(VERSION 3.5.0)
-project(graphoc VERSION 0.2.2 LANGUAGES C)
+project(graphoc VERSION 0.2.3 LANGUAGES C)
 
 include(CTest)
 

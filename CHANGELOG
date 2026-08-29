@@ -1,5 +1,9 @@
 All changes to the repository will be reported here
 
+## [0.2.3]
+### Fixed
+- Copying graph edges in `copy_graph`
+
 ## [0.2.2]
 ### Fixed
 - Number of nodes allocated in create_graph
